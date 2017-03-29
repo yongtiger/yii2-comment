@@ -32,7 +32,7 @@ class Comment extends Widget
     /**
      * @var string the view file that will render the comment tree and form for posting comments
      */
-    public $commentView = '@vendor/yongtigercomment/widgets/views/index';
+    public $commentView = '@yongtiger/comment/widgets/views/index';
 
     /**
      * @var string comment form id

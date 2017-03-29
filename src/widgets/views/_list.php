@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yongtiger\comment\Module;
 
 /* @var $this \yii\web\View */
 /* @var $model \yongtiger\comment\models\CommentModel */

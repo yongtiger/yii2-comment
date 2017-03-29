@@ -5,6 +5,7 @@ use yii\helpers\Html;
 use yii\helpers\StringHelper;
 use yii\widgets\Pjax;
 use yii2mod\moderation\enums\Status;
+use yongtiger\comment\Module;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */

@@ -3,6 +3,7 @@
 use yii\helpers\ArrayHelper;
 use yii\widgets\ListView;
 use yii\widgets\Pjax;
+use yongtiger\comment\Module;
 
 /* @var $this \yii\web\View */
 /* @var $commentModel \yongtiger\comment\models\CommentModel */

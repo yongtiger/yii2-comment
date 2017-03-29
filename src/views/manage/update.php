@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\imperavi\Widget;
 use yii\widgets\ActiveForm;
+use yongtiger\comment\Module;
 use yii2mod\moderation\enums\Status;
 
 /* @var $this yii\web\View */

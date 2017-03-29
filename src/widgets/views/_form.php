@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
+use yongtiger\comment\Module;
 
 /* @var $this \yii\web\View */
 /* @var $commentModel \yongtiger\comment\models\CommentModel */
