@@ -79,7 +79,7 @@ class DefaultController extends Controller
     public function actionCreate($entity)
     {
         /* @var $commentModel CommentModel */
-        $commentModel = Yii::createObject(Yii::$app->getModule(Module::$name)->commentModelClass);
+        $commentModel = Yii::createObject(Module::instance()->commentModelClass);
         $event = Yii::createObject(['class' => CommentEvent::class, 'commentModel' => $commentModel]);
         $commentModel->setAttributes($this->getCommentAttributesFromEntity($entity));
         $this->trigger(self::EVENT_BEFORE_CREATE, $event);
@@ -131,7 +131,7 @@ class DefaultController extends Controller
     protected function findModel($id)
     {
         /** @var CommentModel $model */
-        $commentModelClass = Yii::$app->getModule(Module::$name)->commentModelClass;
+        $commentModelClass = Module::instance()->commentModelClass;
         if (($model = $commentModelClass::findOne($id)) !== null) {
             return $model;
         } else {
@@ -150,7 +150,7 @@ class DefaultController extends Controller
      */
     protected function getCommentAttributesFromEntity($entity)
     {
-        $decryptEntity = Yii::$app->getSecurity()->decryptByKey(utf8_decode($entity), Module::$name);
+        $decryptEntity = Yii::$app->getSecurity()->decryptByKey(utf8_decode($entity), Module::$moduleName);
         if ($decryptEntity !== false) {
             return Json::decode($decryptEntity);
         }

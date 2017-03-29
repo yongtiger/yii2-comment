@@ -1,5 +1,8 @@
 # Development roadmap
 
+## v0.0.2 (CHG# Module::instance())
+
+
 ## v0.0.1 (typo)
 
 

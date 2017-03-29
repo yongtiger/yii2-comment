@@ -58,7 +58,7 @@ class ManageController extends Controller
     {
         $searchModel = Yii::createObject($this->searchClass);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $commentModel = Yii::$app->getModule(Module::$name)->commentModelClass;
+        $commentModel = Module::instance()->commentModelClass;
 
         return $this->render($this->indexView, [
             'dataProvider' => $dataProvider,
@@ -121,7 +121,7 @@ class ManageController extends Controller
      */
     protected function findModel($id)
     {
-        $commentModel = Yii::$app->getModule(Module::$name)->commentModelClass;
+        $commentModel = Module::instance()->commentModelClass;
 
         if (($model = $commentModel::findOne($id)) !== null) {
             return $model;

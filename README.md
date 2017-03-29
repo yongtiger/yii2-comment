@@ -1,4 +1,4 @@
-# Yii2-comment v0.0.1 (typo)
+# Yii2-comment v0.0.2 (CHG# Module::instance())
 
 [![Latest Stable Version](https://poser.pugx.org/yongtiger/yii2-comment/v/stable)](https://packagist.org/packages/yongtiger/yii2-comment)
 [![Total Downloads](https://poser.pugx.org/yongtiger/yii2-comment/downloads)](https://packagist.org/packages/yongtiger/yii2-comment) 

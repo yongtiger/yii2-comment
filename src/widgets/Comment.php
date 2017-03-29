@@ -134,7 +134,7 @@ class Comment extends Widget
      */
     public function run()
     {
-        $commentClass = Yii::$app->getModule(Module::$name)->commentModelClass;
+        $commentClass = Module::instance()->commentModelClass;
         $commentModel = Yii::createObject([
             'class' => $commentClass,
             'entity' => $this->entity,
@@ -165,7 +165,7 @@ class Comment extends Widget
             'entity' => $this->entity,
             'entityId' => $this->entityId,
             'relatedTo' => $this->relatedTo,
-        ]), Module::$name));
+        ]), Module::$moduleName));
     }
 
     /**

@@ -14,7 +14,7 @@ class Module extends \yii\base\Module
     /**
      * @var string module name
      */
-    public static $name = 'comment';
+    public static $moduleName = 'comment';
 
     /**
      * @var string the class name of the [[identity]] object
@@ -32,7 +32,7 @@ class Module extends \yii\base\Module
     public $controllerNamespace = 'yongtiger\comment\controllers';
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function init()
     {
@@ -41,6 +41,14 @@ class Module extends \yii\base\Module
         if ($this->userIdentityClass === null) {
             $this->userIdentityClass = Yii::$app->getUser()->identityClass;
         }
+    }
+
+    /**
+     * @return static
+     */
+    public static function instance()
+    {
+        return Yii::$app->getModule(static::$moduleName);
     }
 
     /**
