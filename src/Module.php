@@ -65,6 +65,8 @@ class Module extends \yii\base\Module
      *   ]
      * ```
      *
+     * @see https://github.com/yeesoft/yii2-comments/blob/master/Comments.php#L113
+     *
      * @var string|callable
      */
     public $userAvatar;

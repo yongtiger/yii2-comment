@@ -188,8 +188,9 @@ class Comment extends Widget
     protected function registerAssets()
     {
         $view = $this->getView();
-        
+
         ///[v0.0.9 (ADD# getUserAvatar)]
+        ///@see https://github.com/yeesoft/yii2-comments/blob/86bc4887517520f962bbb3f8669ef14177af9564/widgets/Comments.php#L32
         $commentAsset = CommentAsset::register($view);
         Module::instance()->commentAssetUrl = $commentAsset->baseUrl;
 
