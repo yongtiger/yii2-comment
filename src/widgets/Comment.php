@@ -188,7 +188,11 @@ class Comment extends Widget
     protected function registerAssets()
     {
         $view = $this->getView();
-        CommentAsset::register($view);
+        
+        ///[v0.0.9 (ADD# getUserAvatar)]
+        $commentAsset = CommentAsset::register($view);
+        Module::instance()->commentAssetUrl = $commentAsset->baseUrl;
+
         $view->registerJs("jQuery('#{$this->commentWrapperId}').comment({$this->getClientOptions()});");
     }
 

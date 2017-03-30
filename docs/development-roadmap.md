@@ -1,5 +1,12 @@
 # Development roadmap
 
+## v0.0.9 (ADD# getUserAvatar)
+
+* `\src\Module.php` (40,93)
+* `\models\CommentModel.php` (338)
+* `\widgets\Comment.php` (192)
+
+
 ## v0.0.8 (ADD# yongtiger\comment\behaviors)
 
 

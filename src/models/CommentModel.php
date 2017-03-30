@@ -334,9 +334,9 @@ class CommentModel extends ActiveRecord
     {
         if ($this->author->hasMethod('getAvatar')) {
             return $this->author->getAvatar();
+        } else {    ///[v0.0.9 (ADD# getUserAvatar)]
+            return Module::instance()->getUserAvatar($this->author->id);
         }
-
-        return 'http://www.gravatar.com/avatar?d=mm&f=y&s=50';
     }
 
     /**
