@@ -263,8 +263,8 @@ class CommentModel extends ActiveRecord
         $tree = [];
 
         foreach ($data as $id => $node) {
-            if ($node->parentId == $rootID) {
-                // unset($data[$id]);///[BUG]
+            if (isset($node) && $node->parentId == $rootID) {
+                $data[$id] = (unset)$data[$id];///[v0.0.5 (FIX# buildTree)]As the php documentation reads:As foreach relies on the internal array pointer in PHP 5, changing it within the loop may lead to unexpected behavior.
                 $node->children = self::buildTree($data, $node->id);
                 $tree[] = $node;
             }

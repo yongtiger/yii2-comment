@@ -1,5 +1,10 @@
 # Development roadmap
 
+## v0.0.5 (FIX# buildTree)
+
+* `\models\CommentModel.php` (267)
+
+
 ## v0.0.4 (CHG# listViewConfig)
 
 * `\widgets\Comment.php` (138)
