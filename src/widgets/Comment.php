@@ -125,7 +125,6 @@ class Comment extends Widget
                 'pageParam' => 'page',
                 'pageSizeParam' => 'per-page',
                 'pageSize' => 10,
-                'pageSizeLimit' => [1, 50],
             ],
             'sort' => [
                 'attributes' => ['id'],
@@ -137,7 +136,7 @@ class Comment extends Widget
 
         ///[v0.0.4 (CHG# listViewConfig)]
         $this->listViewConfig = ArrayHelper::merge([
-            'emptyText' => 'no comment',
+            'emptyText' => '',
         ], $this->listViewConfig);
 
         $this->registerAssets();
@@ -207,6 +206,9 @@ class Comment extends Widget
 
     /**
      * Get comment ArrayDataProvider
+     *
+     * Note: Compared to [[ActiveDataProvider]], ArrayDataProvider could be less efficient because it needs to have [[allModels]] ready.
+     * @see [[ArrayDataProvider]]
      *
      * @param CommentModel $commentClass
      *
