@@ -39,6 +39,36 @@ use yongtiger\comment\widgets\Comment;
  * }
  * ```
  *
+ * Usage Example:
+ *
+ * ```php
+ * echo $postModelClassName::findOne(5)->displayComment();
+ * ```
+ *
+ * Note: Configs in `displayComment()` will overrides the configs in behaviors:
+ * ```php
+ * echo $postModelClassName::findOne(5)->displayComment(
+ *     [
+ *         'dataProviderConfig' => [
+ *             'pagination' => [
+ *                 'pageParam' => 'comment-page',
+ *                 'pageSizeParam' => 'comment-per-page',
+ *                 'pageSize' => 5,
+ *             ],
+ *             'sort' => [
+ *                 // 'attributes' => new \yii\helpers\ReplaceArrayValue(['createdAt']),
+ *                 'defaultOrder' => [
+ *                     // 'id' => SORT_DESC,
+ *                     'id' => SORT_ASC,
+ *                     // 'createdAt' => SORT_DESC,
+ *                     // 'createdAt' => SORT_ASC,
+ *                 ],
+ *             ],
+ *         ]
+ *     ]
+ * );
+ * ```
+ *
  * [REFERENCES]
  *
  * @see https://github.com/yeesoft/yii2-comments#usage
