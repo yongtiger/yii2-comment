@@ -5,11 +5,10 @@ namespace yongtiger\comment\widgets;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\base\Widget;
-use yii\data\ArrayDataProvider;
 use yii\helpers\Json;
 use yii\helpers\ArrayHelper;
+use yii\data\ArrayDataProvider;
 use yongtiger\comment\CommentAsset;
-use yongtiger\comment\models\CommentModel;
 use yongtiger\comment\Module;
 
 /**
