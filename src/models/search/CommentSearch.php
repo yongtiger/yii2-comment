@@ -57,7 +57,7 @@ class CommentSearch extends CommentModel
         // adjust the query by adding the filters
         $query->andFilterWhere(['id' => $this->id]);
 
-        ///[datepicker]
+        ///[v0.0.6 (ADD# datepicker)]
         $query->andFilterWhere(['DATE(FROM_UNIXTIME(createdAt))' => $this->createdAt]);
 
         $query->andFilterWhere(['status' => $this->status]);

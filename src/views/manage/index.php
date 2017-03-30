@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filterInputOptions' => ['prompt' => Module::t('message', 'Select Status'), 'class' => 'form-control'],
             ],
 
-            ///[yii2-user:datepicker]
+            ///[v0.0.6 (ADD# datepicker)]
             ['attribute' => 'created_at', 'format' => ['datetime', 'php:Y-m-d H:i:s'],
                 'filter' => DatePicker::widget(
                     [
