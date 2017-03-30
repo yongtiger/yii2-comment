@@ -54,11 +54,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             ///[v0.0.6 (ADD# datepicker)]
-            ['attribute' => 'created_at', 'format' => ['datetime', 'php:Y-m-d H:i:s'],
+            ['attribute' => 'createdAt', 'format' => ['datetime', 'php:Y-m-d H:i:s'],
                 'filter' => DatePicker::widget(
                     [
                         'model' => $searchModel, 
-                        'attribute' => 'created_at', 
+                        'attribute' => 'createdAt', 
                         'dateFormat' => 'yyyy-MM-dd', 
                         'options' => [
                             'id' => 'datepicker_created_at',    ///Note: if no `id`, `DatePicker` dosen't work!

@@ -24,6 +24,7 @@ class CommentSearch extends CommentModel
     {
         return [
             [['id', 'createdBy', 'content', 'status', 'relatedTo'], 'safe'],
+            [['createdAt', 'updatedAt'], 'date', 'format' => 'yyyy-MM-dd'],  ///[v0.0.6 (ADD# datepicker)]
         ];
     }
 
@@ -56,13 +57,13 @@ class CommentSearch extends CommentModel
 
         // adjust the query by adding the filters
         $query->andFilterWhere(['id' => $this->id]);
-
-        ///[v0.0.6 (ADD# datepicker)]
-        $query->andFilterWhere(['DATE(FROM_UNIXTIME(createdAt))' => $this->createdAt]);
-
+        $query->andFilterWhere(['createdBy' => $this->createdBy]);
         $query->andFilterWhere(['status' => $this->status]);
         $query->andFilterWhere(['like', 'content', $this->content]);
         $query->andFilterWhere(['like', 'relatedTo', $this->relatedTo]);
+
+        ///[v0.0.6 (ADD# datepicker)]
+        $query->andFilterWhere(['DATE(FROM_UNIXTIME(createdAt))' => $this->createdAt]);
 
         return $dataProvider;
     }
