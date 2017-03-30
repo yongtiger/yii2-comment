@@ -10,6 +10,38 @@ use yongtiger\comment\widgets\Comment;
  *
  * Renders comment and form for owner model.
  *
+ * Example Post model behaviors configuration:
+ *
+ * ```php
+ * public function behaviors()
+ * {
+ *     return [
+ *         'comment' => [
+ *             'class' => \yongtiger\comment\behaviors\CommentBehavior::className(),
+ *             'config' => [
+ *                 'dataProviderConfig' => [
+ *                     'pagination' => [
+ *                         'pageParam' => 'comment-page',
+ *                         'pageSizeParam' => 'comment-per-page',
+ *                         'pageSize' => 10,
+ *                     ],
+ *                     'sort' => [
+ *                          'defaultOrder' => [
+ *                             'id' => SORT_DESC,
+ *                             // 'id' => SORT_ASC,
+ *                         ],
+ *                     ],
+ *                 ],
+ *             ],
+ *         ],
+ *         // ...
+ *     ];
+ * }
+ * ```
+ *
+ * [REFERENCES]
+ *
+ * @see https://github.com/yeesoft/yii2-comments#usage
  */
 class CommentBehavior extends Behavior
 {
