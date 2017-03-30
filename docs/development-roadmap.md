@@ -1,5 +1,10 @@
 # Development roadmap
 
+## v0.0.7 (CHG# remove yii\imperavi\Widget)
+
+* `\views\manage\update.php` (23)
+
+
 ## v0.0.6 (ADD# datepicker)
 
 * `\models\search\CommentSearch.php` (60)

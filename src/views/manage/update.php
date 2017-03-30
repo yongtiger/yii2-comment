@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\imperavi\Widget;
 use yii\widgets\ActiveForm;
 use yongtiger\comment\Module;
 use yii2mod\moderation\enums\Status;
@@ -20,15 +19,9 @@ $this->params['breadcrumbs'][] = Module::t('message', 'Update');
 
     <div class="comment-form">
         <?php $form = ActiveForm::begin(); ?>
-        <?php echo $form->field($model, 'content')->widget(Widget::class, [
-            'options' => [
-                'minHeight' => 300,
-                'replaceDivs' => true,
-                'paragraphize' => false,
-            ],
-            'id' => 'content',
-        ]);
-        ?>
+
+        <?php echo $form->field($model, 'content', ['template' => '{input}{error}'])->textarea(['rows' => 4, 'data' => ['comment' => 'content']]); ?>
+
         <?php echo $form->field($model, 'status')->dropDownList(Status::listData()); ?>
         <div class="form-group">
             <?php echo Html::submitButton(Module::t('message', 'Update'), ['class' => 'btn btn-primary']) ?>
