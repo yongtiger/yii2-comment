@@ -1,6 +1,6 @@
 <?php
 
-namespace yii2mod\comments\models\search;
+namespace yongtiger\comment\models\search;
 
 use yii\data\ActiveDataProvider;
 use yongtiger\comment\models\CommentModel;

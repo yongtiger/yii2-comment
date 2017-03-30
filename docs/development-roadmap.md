@@ -1,5 +1,10 @@
 # Development roadmap
 
+## v0.0.3 (CHG# dataProviderConfig)
+
+* `\widgets\Comment.php` (124)
+
+
 ## v0.0.2 (CHG# Module::instance())
 
 

@@ -7,6 +7,7 @@ use yii\base\InvalidConfigException;
 use yii\base\Widget;
 use yii\data\ArrayDataProvider;
 use yii\helpers\Json;
+use yii\helpers\ArrayHelper;
 use yongtiger\comment\CommentAsset;
 use yongtiger\comment\models\CommentModel;
 use yongtiger\comment\Module;
@@ -57,17 +58,13 @@ class Comment extends Widget
     /**
      * @var array DataProvider config
      */
-    public $dataProviderConfig = [
-        'pagination' => [
-            'pageSize' => false,
-        ],
-    ];
+    public $dataProviderConfig = [];
 
     /**
      * @var array ListView config
      */
     public $listViewConfig = [
-        'emptyText' => '',
+        'emptyText' => 'no comment',
     ];
 
     /**
@@ -123,6 +120,22 @@ class Comment extends Widget
 
         $this->encryptedEntity = $this->getEncryptedEntity();
         $this->commentWrapperId = $this->entity . $this->entityId;
+
+        ///[v0.0.3 (CHG# dataProviderConfig)]
+        $this->dataProviderConfig = ArrayHelper::merge([
+            'pagination' => [
+                'pageParam' => 'page',
+                'pageSizeParam' => 'per-page',
+                'pageSize' => 10,
+                'pageSizeLimit' => [1, 50],
+            ],
+            'sort' => [
+                'attributes' => ['id'],
+                'defaultOrder' => [
+                    'id' => SORT_DESC,
+                ],
+            ],
+        ], $this->dataProviderConfig);
 
         $this->registerAssets();
     }
@@ -202,7 +215,6 @@ class Comment extends Widget
         if (!isset($this->dataProviderConfig['allModels'])) {
             $dataProvider->allModels = $commentClass::getTree($this->entity, $this->entityId, $this->maxLevel);
         }
-
         return $dataProvider;
     }
 }
