@@ -4,8 +4,9 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\StringHelper;
 use yii\widgets\Pjax;
-use yii2mod\moderation\enums\Status;
+use yii\jui\DatePicker;
 use yongtiger\comment\Module;
+use yii2mod\moderation\enums\Status;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -51,13 +52,24 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => Status::listData(),
                 'filterInputOptions' => ['prompt' => Module::t('message', 'Select Status'), 'class' => 'form-control'],
             ],
-            [
-                'attribute' => 'createdAt',
-                'value' => function ($model) {
-                    return Yii::$app->formatter->asDatetime($model->createdAt);
-                },
-                'filter' => false,
+
+            ///[yii2-user:datepicker]
+            ['attribute' => 'created_at', 'format' => ['datetime', 'php:Y-m-d H:i:s'],
+                'filter' => DatePicker::widget(
+                    [
+                        'model' => $searchModel, 
+                        'attribute' => 'created_at', 
+                        'dateFormat' => 'yyyy-MM-dd', 
+                        'options' => [
+                            'id' => 'datepicker_created_at',    ///Note: if no `id`, `DatePicker` dosen't work!
+                            'style' => 'text-align: center', 
+                            'class' => 'form-control'   ///The style is consistent with the form
+                        ]
+                    ]
+                )
             ],
+
+
             [
                 'header' => 'Actions',
                 'class' => 'yii\grid\ActionColumn',

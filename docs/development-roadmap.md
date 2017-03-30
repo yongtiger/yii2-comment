@@ -1,5 +1,10 @@
 # Development roadmap
 
+## v0.0.6 (ADD# datepicker)
+
+* `\models\search\CommentSearch.php` (60)
+
+
 ## v0.0.5 (FIX# buildTree)
 
 * `\models\CommentModel.php` (267)

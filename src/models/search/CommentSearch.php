@@ -56,7 +56,10 @@ class CommentSearch extends CommentModel
 
         // adjust the query by adding the filters
         $query->andFilterWhere(['id' => $this->id]);
-        $query->andFilterWhere(['createdBy' => $this->createdBy]);
+
+        ///[datepicker]
+        $query->andFilterWhere(['DATE(FROM_UNIXTIME(createdAt))' => $this->createdAt]);
+
         $query->andFilterWhere(['status' => $this->status]);
         $query->andFilterWhere(['like', 'content', $this->content]);
         $query->andFilterWhere(['like', 'relatedTo', $this->relatedTo]);
