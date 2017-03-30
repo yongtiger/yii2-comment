@@ -63,9 +63,7 @@ class Comment extends Widget
     /**
      * @var array ListView config
      */
-    public $listViewConfig = [
-        'emptyText' => 'no comment',
-    ];
+    public $listViewConfig = [];
 
     /**
      * @var array comment widget client options
@@ -136,6 +134,11 @@ class Comment extends Widget
                 ],
             ],
         ], $this->dataProviderConfig);
+
+        ///[v0.0.4 (CHG# listViewConfig)]
+        $this->listViewConfig = ArrayHelper::merge([
+            'emptyText' => 'no comment',
+        ], $this->listViewConfig);
 
         $this->registerAssets();
     }

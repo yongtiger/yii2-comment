@@ -1,5 +1,10 @@
 # Development roadmap
 
+## v0.0.4 (CHG# listViewConfig)
+
+* `\widgets\Comment.php` (138)
+
+
 ## v0.0.3 (CHG# dataProviderConfig)
 
 * `\widgets\Comment.php` (124)
