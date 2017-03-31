@@ -113,6 +113,10 @@
         $commentForm.find('[data-comment="parent-id"]').val($this.data('comment-id'));
         $commentForm.find(settings.cancelReplyBtnSelector).show();
 
+        ///[v0.0.11 (ADD# placeholder @authorName)]
+        var authorName = $(parentCommentSelector).find('.comment-author-name span').html();
+        $commentForm.find('#commentmodel-content').attr('placeholder', '@' + authorName);
+
         return false;
     }
 

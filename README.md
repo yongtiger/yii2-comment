@@ -1,4 +1,4 @@
-# Yii2-comment v0.0.10 (ADD# getUserAvatar)
+# Yii2-comment v0.0.11 (ADD# placeholder @authorName)
 
 [![Latest Stable Version](https://poser.pugx.org/yongtiger/yii2-comment/v/stable)](https://packagist.org/packages/yongtiger/yii2-comment)
 [![Total Downloads](https://poser.pugx.org/yongtiger/yii2-comment/downloads)](https://packagist.org/packages/yongtiger/yii2-comment) 

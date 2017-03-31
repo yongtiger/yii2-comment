@@ -1,5 +1,10 @@
 # Development roadmap
 
+## v0.0.11 (ADD# placeholder @authorName)
+
+* `\assets\js\comment.js` (116)
+
+
 ## v0.0.10 (ADD# getUserAvatar)
 
 * `\src\Module.php` (76)
