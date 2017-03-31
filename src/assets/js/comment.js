@@ -54,6 +54,10 @@
                 $comment.on('click.comment', '[data-action="reply"]', eventParams, reply);
                 $comment.on('click.comment', '[data-action="cancel-reply"]', eventParams, cancelReply);
                 $comment.on('click.comment', '[data-action="delete"]', eventParams, deleteComment);
+
+                ///[v0.0.14 (CHG# vote)]
+                $comment.on('click.comment', '[data-action="vote"]', eventParams, voteComment);
+
             });
         },
         data: function () {
@@ -148,11 +152,38 @@
             url: $this.data('url'),
             type: 'DELETE',
             error: function (xhr, status, error) {
-                alert(error);
+                alert(xhr.responseText);
             },
             success: function (result, status, xhr) {
                 $this.parents('[data-comment-content-id="' + $this.data('comment-id') + '"]').find(settings.contentSelector).text(result);
                 $this.parents(settings.toolsSelector).remove();
+            }
+        });
+
+        return false;
+    }
+
+    ///[v0.0.14 (CHG# vote)]
+    /**
+     * Delete a comment
+     * @param event
+     */
+    function voteComment(event) {
+        var $this = $(this);
+        var settings = commentData[event.data.wrapperSelector].settings;
+        var pjaxSettings = $.extend({container: settings.pjaxContainerId}, settings.pjaxSettings);
+        var url = $this.data('url');
+        var value = $this.data('value');
+        var comment_id = $this.data('comment-id');
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {id: comment_id, vote: value},
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            },
+            success: function (result, status, xhr) {
+                $.pjax(pjaxSettings);
             }
         });
 

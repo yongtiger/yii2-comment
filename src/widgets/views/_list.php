@@ -27,9 +27,9 @@ use yongtiger\comment\Module;
                     <?php echo Html::a("<span class='glyphicon glyphicon-share-alt'></span> " . Module::t('message', 'Reply'), '#', ['class' => 'comment-reply', 'data' => ['action' => 'reply', 'comment-id' => $model->id]]); ?>
                 <?php endif; ?>
 
-                <!--///[v0.0.12 (ADD# vote)]-->
-                <a href="javascript:void(0);" class="glyphicon glyphicon-thumbs-up" onclick="vote(<?= $model->id ?>, 1)"></a> <span><?= $model->up_vote ?></span>
-                <a href="javascript:void(0);" class="glyphicon glyphicon-thumbs-down" onclick="vote(<?= $model->id ?>, -1)"></a> <span><?= $model->down_vote ?></span>
+                <!--///[v0.0.14 (CHG# vote)]-->
+                <?php echo Html::a("<span class='glyphicon glyphicon-thumbs-up'> {$model->up_vote}</span>", '#', ['class' => 'comment-up-vote', 'data' => ['action' => 'vote', 'value' => 1, 'url' => Url::to(['/comment/default/update-vote', 'id' => $model->id]), 'comment-id' => $model->id]]); ?>
+                <?php echo Html::a("<span class='glyphicon glyphicon-thumbs-down'> {$model->down_vote}</span>", '#', ['class' => 'comment-down-vote', 'data' => ['action' => 'vote', 'url' => Url::to(['/comment/default/update-vote', 'id' => $model->id]), 'value' => -1, 'comment-id' => $model->id]]); ?>
 
             </div>
             <div class="comment-author-name">

@@ -20,17 +20,6 @@ use yongtiger\comment\Module;
 
 $commentModelClass = Module::instance()->commentModelClass; ///[v0.0.10 (ADD# canCallback)]
 
-///[vote]
-$url = Url::to(['comment/default/update-vote']);
-$this->registerJs(
-<<<JS
-function vote(comment_id, vote){ 
-    htmlobj=$.ajax({url:"{$url}&id="+comment_id+"&vote="+vote});
-    $.pjax.reload({container:"#{$pjaxContainerId}"});  //Reload ListView
-}
-JS
-, View::POS_END);
-
 ?>
 <div class="comment-wrapper" id="<?php echo $commentWrapperId; ?>">
     <?php Pjax::begin(['enablePushState' => false, 'timeout' => 30000, 'id' => $pjaxContainerId]); ?>
