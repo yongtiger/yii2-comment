@@ -1,5 +1,12 @@
 # Development roadmap
 
+## v0.0.14 (CHG# vote)
+
+* `\assets\js\comment.js` (166)
+* `\widgets\views\_list.php` (30)
+* `\controllers\DefaultController.php` (161)
+
+
 ## v0.0.13 (CHG# url:comment/default/update-vote)
 
 * `\widgets\views\index.php` (24)
