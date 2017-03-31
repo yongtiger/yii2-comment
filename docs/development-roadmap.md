@@ -1,5 +1,13 @@
 # Development roadmap
 
+## v0.0.12 (ADD# vote)
+
+* `\controllers\DefaultController.php` (161)
+* `\widgets\views\_list.php` (30)
+* `\widgets\views\index.php` (23)
+* `\models\CommentModel.php`
+
+
 ## v0.0.11 (ADD# placeholder @authorName)
 
 * `\assets\js\comment.js` (116)

@@ -130,7 +130,7 @@ class DefaultController extends Controller
      */
     protected function findModel($id)
     {
-        /** @var CommentModel $model */
+        /* @var $commentModelClass string class name of \yongtiger\comment\models\CommentModel */
         $commentModelClass = Module::instance()->commentModelClass;
         if (($model = $commentModelClass::findOne($id)) !== null) {
             return $model;
@@ -156,5 +156,33 @@ class DefaultController extends Controller
         }
 
         throw new BadRequestHttpException(Module::t('message', 'Oops, something went wrong. Please try again later.'));
+    }
+
+    ///[v0.0.12 (ADD# vote)]
+    /**
+     * Updates vote
+     *
+     * @param $id integer
+     * @param $vote integer
+     *
+     * @return int the number of rows updated
+     */
+    public function actionUpdateVote($id, $vote)
+    {
+        if (!empty($vote)) {
+            /* @var $commentModelClass string class name of \yongtiger\comment\models\CommentModel */
+            $commentModelClass = Module::instance()->commentModelClass;
+            $commentModel = self::findModel($id);
+            if ($commentModel->can($commentModelClass::PERMISSION_VOTE)) {
+                $commentModelClass::updateAllCounters( $vote > 0 ? ['up_vote' => $vote] : ['down_vote' => $vote], ['id' => $id]);
+                return ['status' => 'success'];  
+            }
+            return [
+                'status' => 'error',
+                'errors' => Module::t('message', 'No Permission to vote!'),
+            ];
+        }
+        Yii::$app->response->setStatusCode(500);
+        return Module::t('message', 'Invalid input.');
     }
 }

@@ -58,12 +58,13 @@ class ManageController extends Controller
     {
         $searchModel = Yii::createObject($this->searchClass);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $commentModel = Module::instance()->commentModelClass;
+        /* @var $commentModelClass string class name of \yongtiger\comment\models\CommentModel */
+        $commentModelClass = Module::instance()->commentModelClass;
 
         return $this->render($this->indexView, [
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
-            'commentModel' => $commentModel,
+            'commentModel' => $commentModelClass,
         ]);
     }
 
@@ -121,9 +122,10 @@ class ManageController extends Controller
      */
     protected function findModel($id)
     {
-        $commentModel = Module::instance()->commentModelClass;
+        /* @var $commentModelClass string class name of \yongtiger\comment\models\CommentModel */
+        $commentModelClass = Module::instance()->commentModelClass;
 
-        if (($model = $commentModel::findOne($id)) !== null) {
+        if (($model = $commentModelClass::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException(Module::t('message', 'The requested page does not exist.'));

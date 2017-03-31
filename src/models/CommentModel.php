@@ -24,6 +24,8 @@ use yii2mod\moderation\ModerationQuery;
  * @property string $content
  * @property int $parentId
  * @property int $level
+ * @property int $up_vote
+ * @property int $down_vote
  * @property int $createdBy
  * @property int $updatedBy
  * @property string $relatedTo
@@ -45,6 +47,7 @@ class CommentModel extends ActiveRecord
      */
     const PERMISSION_DELETE = 'permision_comment_delete';
     const PERMISSION_UPDATE = 'permision_comment_update';
+    const PERMISSION_VOTE = 'permision_comment_vote';   ///[v0.0.12 (ADD# vote)]
 
     /**
      * @var null|array|ActiveRecord[] comment children
@@ -56,7 +59,7 @@ class CommentModel extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%comment_yii2mod}}';
+        return '{{%comment}}';
     }
 
     /**
@@ -72,7 +75,7 @@ class CommentModel extends ActiveRecord
             ['status', 'in', 'range' => Status::getConstantsByName()],
             ['level', 'default', 'value' => 1],
             ['parentId', 'validateParentID'],
-            [['entityId', 'parentId', 'status', 'level'], 'integer'],
+            [['entityId', 'parentId', 'status', 'level', 'up_vote', 'down_vote'], 'integer'],   ///[v0.0.12 (ADD# vote)]
         ];
     }
 
@@ -149,6 +152,8 @@ class CommentModel extends ActiveRecord
             'parentId' => Module::t('message', 'Parent ID'),
             'status' => Module::t('message', 'Status'),
             'level' => Module::t('message', 'Level'),
+            'up_vote' => Module::t('message', 'Up Vote'), ///[v0.0.12 (ADD# vote)]
+            'down_vote' => Module::t('message', 'Down Vote'), ///[v0.0.12 (ADD# vote)]
             'createdBy' => Module::t('message', 'Created by'),
             'updatedBy' => Module::t('message', 'Updated by'),
             'relatedTo' => Module::t('message', 'Related to'),

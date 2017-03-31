@@ -148,13 +148,14 @@ class Comment extends Widget
      */
     public function run()
     {
-        $commentClass = Module::instance()->commentModelClass;
+        /* @var $commentModelClass string class name of \yongtiger\comment\models\CommentModel */
+        $commentModelClass = Module::instance()->commentModelClass;
         $commentModel = Yii::createObject([
-            'class' => $commentClass,
+            'class' => $commentModelClass,
             'entity' => $this->entity,
             'entityId' => $this->entityId,
         ]);
-        $commentDataProvider = $this->getCommentDataProvider($commentClass);
+        $commentDataProvider = $this->getCommentDataProvider($commentModelClass);
 
         return $this->render($this->commentView, [
             'commentDataProvider' => $commentDataProvider,
