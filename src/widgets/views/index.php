@@ -20,13 +20,16 @@ use yongtiger\comment\Module;
 
 $commentModelClass = Module::instance()->commentModelClass; ///[v0.0.10 (ADD# canCallback)]
 
-///[v0.0.12 (ADD# vote)]
-$this->registerJs('
+///[vote]
+$url = Url::to(['comment/default/update-vote']);
+$this->registerJs(
+<<<JS
 function vote(comment_id, vote){ 
-    htmlobj=$.ajax({url:"' . Url::to(['/comment/default/update-vote']) . '&id="+comment_id+"&vote="+vote});
-    $.pjax.reload({container:"#'.$pjaxContainerId.'"});  //Reload ListView
+    htmlobj=$.ajax({url:"{$url}&id="+comment_id+"&vote="+vote});
+    $.pjax.reload({container:"#{$pjaxContainerId}"});  //Reload ListView
 }
-', View::POS_END);
+JS
+, View::POS_END);
 
 ?>
 <div class="comment-wrapper" id="<?php echo $commentWrapperId; ?>">
