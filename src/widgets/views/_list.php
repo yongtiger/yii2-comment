@@ -7,6 +7,9 @@ use yongtiger\comment\Module;
 /* @var $this \yii\web\View */
 /* @var $model \yongtiger\comment\models\CommentModel */
 /* @var $maxLevel null|integer comments max level */
+
+$commentModelClass = Module::instance()->commentModelClass; ///[v0.0.10 (ADD# canCallback)]
+
 ?>
 <li class="comment" id="comment-<?php echo $model->id; ?>">
     <div class="comment-content" data-comment-content-id="<?php echo $model->id ?>">
@@ -15,7 +18,10 @@ use yongtiger\comment\Module;
         </div>
         <div class="comment-details">
             <div class="comment-action-buttons">
-                <?php if (Yii::$app->getUser()->can('admin')) : ?>
+
+                <!--///[v0.0.10 (ADD# canCallback)]-->
+                <?php if ($model->can($commentModelClass::PERMISSION_DELETE)) : ?>
+
                     <?php echo Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Module::t('message', 'Delete'), '#', ['data' => ['action' => 'delete', 'url' => Url::to(['/comment/default/delete', 'id' => $model->id]), 'comment-id' => $model->id]]); ?>
                 <?php endif; ?>
                 <?php if (!Yii::$app->user->isGuest && ($model->level < $maxLevel || is_null($maxLevel))) : ?>

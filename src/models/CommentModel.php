@@ -38,6 +38,14 @@ use yii2mod\moderation\ModerationQuery;
  */
 class CommentModel extends ActiveRecord
 {
+
+    ///[v0.0.10 (ADD# canCallback)]
+    /**
+     * permissions
+     */
+    const PERMISSION_DELETE = 'permision_comment_delete';
+    const PERMISSION_UPDATE = 'permision_comment_update';
+
     /**
      * @var null|array|ActiveRecord[] comment children
      */
@@ -404,4 +412,32 @@ class CommentModel extends ActiveRecord
 
         return true;
     }
+
+    ///[v0.0.10 (ADD# canCallback)]
+    /**
+     * Checks if the user can perform the operation as specified by the given permission.
+     *
+     * @see [[yii\web\User]]
+     *
+     * @param string $permissionName the name of the permission (e.g. "permision_delete_comment") that needs access check.
+     * @param array $params name-value pairs that would be passed to the rules associated
+     * with the roles and permissions assigned to the user.
+     * @param bool $allowCaching whether to allow caching the result of access check.
+     * When this parameter is true (default), if the access check of an operation was performed
+     * before, its result will be directly returned when calling this method to check the same
+     * operation. If this parameter is false, this method will always call
+     * [[\yii\rbac\CheckAccessInterface::checkAccess()]] to obtain the up-to-date access result. Note that this
+     * caching is effective only within the same request and only works when `$params = []`.
+     * @return bool whether the user can perform the operation as specified by the given permission.
+     */
+    public function can($permissionName, $params = [], $allowCaching = true)
+    {
+        $canCallback = Module::instance()->canCallback;
+        if (is_callable($canCallback)) {
+            return call_user_func($canCallback, $permissionName, $params, $allowCaching);
+        } else {
+            return false;
+        }
+    }
+
 }

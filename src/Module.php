@@ -11,7 +11,7 @@ use Yii;
  */
 class Module extends \yii\base\Module
 {
-
+    ///[v0.0.9 (ADD# getUserAvatar)]
     /**
      * Default avatar image
      */
@@ -60,6 +60,7 @@ class Module extends \yii\base\Module
      * 'comment' => [
      *       'class' => 'yongtiger\comment\Comments',
      *       'userAvatar' => function($user_id){
+     *           // customize your own avatar getter code in User ...
      *           return User::getAvatarByID($user_id);
      *       }
      *   ]
@@ -71,6 +72,31 @@ class Module extends \yii\base\Module
      */
     public $userAvatar;
     ///[http://www.brainbook.cc]
+
+    ///[v0.0.10 (ADD# canCallback)]
+    /**
+     * The field for checking user permissions.
+     *
+     * Callback should have the following signature:
+     *
+     * ```php
+     * function($permissionName, $params = [], $allowCaching = true)
+     * ```
+     *
+     * Example of module settings :
+     * ```php
+     * 'comment' => [
+     *       'class' => 'yongtiger\comment\Comments',
+     *       'canCallback' => function($permissionName, $params = [], $allowCaching = true) {
+     *           // customize your own code ...
+     *           return Yii::$app->getUser()->can($permissionName, $params, $allowCaching);
+     *       }
+     *   ]
+     * ```
+     *
+     * @var callable
+     */
+    public $canCallback;
 
     /**
      * @inheritdoc
@@ -104,7 +130,7 @@ class Module extends \yii\base\Module
         $defaultAvatar = $this->commentAssetUrl . self::DEFAULT_AVATAR;
         if (is_string($this->userAvatar)) {
             return $this->userAvatar;
-        } else if ($this->userAvatar instanceof \Closure) {
+        } else if (is_callable($this->userAvatar)) {
             return ($avatar = call_user_func($this->userAvatar, $user_id)) ? $avatar : $defaultAvatar;
         } else {
             return $defaultAvatar;

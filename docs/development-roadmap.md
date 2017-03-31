@@ -1,5 +1,12 @@
 # Development roadmap
 
+## v0.0.10 (ADD# getUserAvatar)
+
+* `\src\Module.php` (76)
+* `\models\CommentModel.php` (42,416)
+* `\widgets\views\_list.php` (11,22)
+
+
 ## v0.0.9 (ADD# getUserAvatar)
 
 * `\src\Module.php` (40,93)
