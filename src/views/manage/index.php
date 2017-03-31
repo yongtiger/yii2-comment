@@ -35,9 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     return StringHelper::truncate($model->content, 100);
                 },
             ],
-            'attribute' => 'relatedTo',
+            'attribute' => 'related_to',
             [
-                'attribute' => 'createdBy',
+                'attribute' => 'created_by',
                 'value' => function ($model) {
                     return $model->getAuthorName();
                 },
@@ -54,11 +54,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             ///[v0.0.6 (ADD# datepicker)]
-            ['attribute' => 'createdAt', 'format' => ['datetime', 'php:Y-m-d H:i:s'],
+            ['attribute' => 'created_at', 'format' => ['datetime', 'php:Y-m-d H:i:s'],
                 'filter' => DatePicker::widget(
                     [
                         'model' => $searchModel, 
-                        'attribute' => 'createdAt', 
+                        'attribute' => 'created_at', 
                         'dateFormat' => 'yyyy-MM-dd', 
                         'options' => [
                             'id' => 'datepicker_created_at',    ///Note: if no `id`, `DatePicker` dosen't work!

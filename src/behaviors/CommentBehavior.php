@@ -56,12 +56,12 @@ use yongtiger\comment\widgets\Comment;
  *                 'pageSize' => 5,
  *             ],
  *             'sort' => [
- *                 // 'attributes' => new \yii\helpers\ReplaceArrayValue(['createdAt']),
+ *                 // 'attributes' => new \yii\helpers\ReplaceArrayValue(['created_at']),
  *                 'defaultOrder' => [
  *                     // 'id' => SORT_DESC,
  *                     'id' => SORT_ASC,
- *                     // 'createdAt' => SORT_DESC,
- *                     // 'createdAt' => SORT_ASC,
+ *                     // 'created_at' => SORT_DESC,
+ *                     // 'created_at' => SORT_ASC,
  *                 ],
  *             ],
  *         ]

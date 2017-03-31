@@ -33,6 +33,9 @@
 
     var commentData = {};
 
+    ///[v0.0.14 (CHG# vote)]
+    var placeholder = $('#commentmodel-content').attr('placeholder');
+
     // Methods
     var methods = {
         init: function (options) {
@@ -137,6 +140,9 @@
         $commentForm.prependTo(formContainer);
         $commentForm.find('[data-comment="parent-id"]').val(null);
 
+        ///[v0.0.14 (CHG# vote)]
+        $commentForm.find('#commentmodel-content').attr('placeholder', placeholder);
+        
         return false;
     }
 

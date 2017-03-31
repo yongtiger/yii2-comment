@@ -2,37 +2,37 @@
 
 namespace yongtiger\comment\models;
 
-use paulzi\adjacencyList\AdjacencyListBehavior;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
-use yii2mod\behaviors\PurifyBehavior;
 use yongtiger\comment\Module;
+use yii2mod\behaviors\PurifyBehavior;
 use yii2mod\moderation\enums\Status;
 use yii2mod\moderation\ModerationBehavior;
 use yii2mod\moderation\ModerationQuery;
+use paulzi\adjacencyList\AdjacencyListBehavior;
 
 /**
  * Class CommentModel
  *
  * @property int $id
  * @property string $entity
- * @property int $entityId
+ * @property int $entity_id
  * @property string $content
- * @property int $parentId
+ * @property int $parent_id
  * @property int $level
- * @property int $up_vote
- * @property int $down_vote
- * @property int $createdBy
- * @property int $updatedBy
- * @property string $relatedTo
+ * @property int $vote_up
+ * @property int $vote_down
+ * @property int $created_by
+ * @property int $updated_by
+ * @property string $related_to
  * @property string $url
  * @property int $status
- * @property int $createdAt
- * @property int $updatedAt
+ * @property int $created_at
+ * @property int $updated_at
  *
  * @method ActiveRecord makeRoot()
  * @method ActiveRecord appendTo($node)
@@ -68,14 +68,14 @@ class CommentModel extends ActiveRecord
     public function rules()
     {
         return [
-            [['entity', 'entityId'], 'required'],
+            [['entity', 'entity_id'], 'required'],
             ['content', 'required', 'message' => Module::t('message', 'Comment cannot be blank.')],
-            [['content', 'entity', 'relatedTo', 'url'], 'string'],
+            [['content', 'entity', 'related_to', 'url'], 'string'],
             ['status', 'default', 'value' => Status::APPROVED],
             ['status', 'in', 'range' => Status::getConstantsByName()],
             ['level', 'default', 'value' => 1],
-            ['parentId', 'validateParentID'],
-            [['entityId', 'parentId', 'status', 'level', 'up_vote', 'down_vote'], 'integer'],   ///[v0.0.12 (ADD# vote)]
+            ['parent_id', 'validateParentID'],
+            [['entity_id', 'parent_id', 'status', 'level', 'vote_up', 'vote_down'], 'integer'],   ///[v0.0.12 (ADD# vote)]
         ];
     }
 
@@ -90,7 +90,7 @@ class CommentModel extends ActiveRecord
                 ->andWhere([
                     'id' => $this->{$attribute},
                     'entity' => $this->entity,
-                    'entityId' => $this->entityId,
+                    'entity_id' => $this->entity_id,
                 ])
                 ->exists();
 
@@ -108,13 +108,13 @@ class CommentModel extends ActiveRecord
         return [
             'blameable' => [
                 'class' => BlameableBehavior::class,
-                'createdByAttribute' => 'createdBy',
-                'updatedByAttribute' => 'updatedBy',
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
             ],
             'timestamp' => [
                 'class' => TimestampBehavior::class,
-                'createdAtAttribute' => 'createdAt',
-                'updatedAtAttribute' => 'updatedAt',
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
             ],
             'purify' => [
                 'class' => PurifyBehavior::class,
@@ -129,7 +129,7 @@ class CommentModel extends ActiveRecord
             ],
             'adjacencyList' => [
                 'class' => AdjacencyListBehavior::class,
-                'parentAttribute' => 'parentId',
+                'parentAttribute' => 'parent_id',
                 'sortable' => false,
             ],
             'moderation' => [
@@ -148,18 +148,18 @@ class CommentModel extends ActiveRecord
             'id' => Module::t('message', 'ID'),
             'content' => Module::t('message', 'Content'),
             'entity' => Module::t('message', 'Entity'),
-            'entityId' => Module::t('message', 'Entity ID'),
-            'parentId' => Module::t('message', 'Parent ID'),
+            'entity_id' => Module::t('message', 'Entity ID'),
+            'parent_id' => Module::t('message', 'Parent ID'),
             'status' => Module::t('message', 'Status'),
             'level' => Module::t('message', 'Level'),
-            'up_vote' => Module::t('message', 'Up Vote'), ///[v0.0.12 (ADD# vote)]
-            'down_vote' => Module::t('message', 'Down Vote'), ///[v0.0.12 (ADD# vote)]
-            'createdBy' => Module::t('message', 'Created by'),
-            'updatedBy' => Module::t('message', 'Updated by'),
-            'relatedTo' => Module::t('message', 'Related to'),
+            'vote_up' => Module::t('message', 'Vote Up'), ///[v0.0.12 (ADD# vote)]
+            'vote_down' => Module::t('message', 'Vote Down'), ///[v0.0.12 (ADD# vote)]
+            'created_by' => Module::t('message', 'Created by'),
+            'updated_by' => Module::t('message', 'Updated by'),
+            'related_to' => Module::t('message', 'Related to'),
             'url' => Module::t('message', 'Url'),
-            'createdAt' => Module::t('message', 'Created date'),
-            'updatedAt' => Module::t('message', 'Updated date'),
+            'created_at' => Module::t('message', 'Created date'),
+            'updated_at' => Module::t('message', 'Updated date'),
         ];
     }
 
@@ -177,8 +177,8 @@ class CommentModel extends ActiveRecord
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
-            if ($this->parentId > 0) {
-                $parentNodeLevel = static::find()->select('level')->where(['id' => $this->parentId])->scalar();
+            if ($this->parent_id > 0) {
+                $parentNodeLevel = static::find()->select('level')->where(['id' => $this->parent_id])->scalar();
                 $this->level = $parentNodeLevel + 1;
             }
 
@@ -208,10 +208,10 @@ class CommentModel extends ActiveRecord
     public function saveComment()
     {
         if ($this->validate()) {
-            if (empty($this->parentId)) {
+            if (empty($this->parent_id)) {
                 return $this->makeRoot()->save();
             } else {
-                $parentComment = static::findOne(['id' => $this->parentId]);
+                $parentComment = static::findOne(['id' => $this->parent_id]);
 
                 return $this->appendTo($parentComment)->save();
             }
@@ -229,7 +229,7 @@ class CommentModel extends ActiveRecord
     {
         $module = Module::instance();
 
-        return $this->hasOne($module->userIdentityClass, ['id' => 'createdBy']);
+        return $this->hasOne($module->userIdentityClass, ['id' => 'created_by']);
     }
 
     /**
@@ -246,7 +246,7 @@ class CommentModel extends ActiveRecord
         $query = static::find()
             ->approved()
             ->andWhere([
-                'entityId' => $entityId,
+                'entity_id' => $entityId,
                 'entity' => $entity,
             ])->with(['author']);
 
@@ -276,7 +276,7 @@ class CommentModel extends ActiveRecord
         $tree = [];
 
         foreach ($data as $id => $node) {
-            if (isset($node) && $node->parentId == $rootID) {
+            if (isset($node) && $node->parent_id == $rootID) {
                 $data[$id] = (unset)$data[$id];///[v0.0.5 (FIX# buildTree)]As the php documentation reads:As foreach relies on the internal array pointer in PHP 5, changing it within the loop may lead to unexpected behavior.
                 $node->children = self::buildTree($data, $node->id);
                 $tree[] = $node;
@@ -315,7 +315,7 @@ class CommentModel extends ActiveRecord
      */
     public function getPostedDate()
     {
-        return Yii::$app->formatter->asRelativeTime($this->createdAt);
+        return Yii::$app->formatter->asRelativeTime($this->created_at);
     }
 
     /**
@@ -361,14 +361,14 @@ class CommentModel extends ActiveRecord
     {
         $query = static::find()
             ->alias('c')
-            ->select(['c.createdBy', 'a.username'])
+            ->select(['c.created_by', 'a.username'])
             ->joinWith('author a')
-            ->groupBy(['c.createdBy', 'a.username'])
+            ->groupBy(['c.created_by', 'a.username'])
             ->orderBy('a.username')
             ->asArray()
             ->all();
 
-        return ArrayHelper::map($query, 'createdBy', 'author.username');
+        return ArrayHelper::map($query, 'created_by', 'author.username');
     }
 
     /**
@@ -378,7 +378,7 @@ class CommentModel extends ActiveRecord
     {
         return (int)static::find()
             ->approved()
-            ->andWhere(['entity' => $this->entity, 'entityId' => $this->entityId])
+            ->andWhere(['entity' => $this->entity, 'entity_id' => $this->entity_id])
             ->count();
     }
 

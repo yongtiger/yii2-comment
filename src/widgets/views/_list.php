@@ -28,8 +28,8 @@ use yongtiger\comment\Module;
                 <?php endif; ?>
 
                 <!--///[v0.0.14 (CHG# vote)]-->
-                <?php echo Html::a("<span class='glyphicon glyphicon-thumbs-up'> {$model->up_vote}</span>", '#', ['class' => 'comment-up-vote', 'data' => ['action' => 'vote', 'value' => 1, 'url' => Url::to(['/comment/default/update-vote', 'id' => $model->id]), 'comment-id' => $model->id]]); ?>
-                <?php echo Html::a("<span class='glyphicon glyphicon-thumbs-down'> {$model->down_vote}</span>", '#', ['class' => 'comment-down-vote', 'data' => ['action' => 'vote', 'url' => Url::to(['/comment/default/update-vote', 'id' => $model->id]), 'value' => -1, 'comment-id' => $model->id]]); ?>
+                <?php echo Html::a("<span class='glyphicon glyphicon-thumbs-up'> {$model->vote_up}</span>", '#', ['class' => 'comment-vote_up', 'data' => ['action' => 'vote', 'value' => 1, 'url' => Url::to(['/comment/default/update-vote', 'id' => $model->id]), 'comment-id' => $model->id]]); ?>
+                <?php echo Html::a("<span class='glyphicon glyphicon-thumbs-down'> {$model->vote_down}</span>", '#', ['class' => 'comment-vote_down', 'data' => ['action' => 'vote', 'url' => Url::to(['/comment/default/update-vote', 'id' => $model->id]), 'value' => -1, 'comment-id' => $model->id]]); ?>
 
             </div>
             <div class="comment-author-name">

@@ -153,7 +153,7 @@ class Comment extends Widget
         $commentModel = Yii::createObject([
             'class' => $commentModelClass,
             'entity' => $this->entity,
-            'entityId' => $this->entityId,
+            'entity_id' => $this->entityId,
         ]);
         $commentDataProvider = $this->getCommentDataProvider($commentModelClass);
 
@@ -178,8 +178,8 @@ class Comment extends Widget
     {
         return utf8_encode(Yii::$app->getSecurity()->encryptByKey(Json::encode([
             'entity' => $this->entity,
-            'entityId' => $this->entityId,
-            'relatedTo' => $this->relatedTo,
+            'entity_id' => $this->entityId,
+            'related_to' => $this->relatedTo,
         ]), Module::$moduleName));
     }
 

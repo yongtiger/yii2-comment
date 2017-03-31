@@ -22,7 +22,7 @@ use yongtiger\comment\Module;
     ]); ?>
 
     <?php echo $form->field($commentModel, 'content', ['template' => '{input}{error}'])->textarea(['placeholder' => Module::t('message', 'Add a comment...'), 'rows' => 4, 'data' => ['comment' => 'content']]) ?>
-    <?php echo $form->field($commentModel, 'parentId', ['template' => '{input}'])->hiddenInput(['data' => ['comment' => 'parent-id']]); ?>
+    <?php echo $form->field($commentModel, 'parent_id', ['template' => '{input}'])->hiddenInput(['data' => ['comment' => 'parent-id']]); ?>
     <div class="comment-box-partial">
         <div class="button-container show">
             <?php echo Html::a(Module::t('message', 'Click here to cancel reply.'), '#', ['id' => 'cancel-reply', 'class' => 'pull-right', 'data' => ['action' => 'cancel-reply']]); ?>
