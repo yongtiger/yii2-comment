@@ -51,7 +51,7 @@ $orderBy = empty($params['orderby']) ? $this->context->sort : $params['orderby']
                     'summary' => '
                         <div class="title-block clearfix">
                             <h3 class="h3-body-title">
-                                Comments ({totalCount})
+                                ' . Module::t('message', 'Comments') . ' ({totalCount})
                             </h3>
                             <div class="title-separator"></div>
                             <ul class="nav nav-tabs comment-action-buttons">

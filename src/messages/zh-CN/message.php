@@ -53,6 +53,7 @@ return [
     'Go Back' => '返回',
 
     ///\vendor\yongtiger\yii2-comment\src\widgets\views\index.php
+    'Comments' => '评论',
     'Latest' => '最新评论',
     'Earliest' => '最早评论',
     'Most Vote Up' => '最多好评',
@@ -65,4 +66,6 @@ return [
     'No Permission to vote!' => '没有投票权限！',
     'Invalid vote input.' => '无效投票操作！',
 
+    'Vote Up' => '好评',
+    'Vote Down' => '差评',
 ];
