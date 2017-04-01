@@ -1,5 +1,10 @@
 # Development roadmap
 
+## v0.0.20 (ADD# backend typo)
+
+* `\views\manage\index.php' (32)
+
+
 ## v0.0.19 (ADD# backend editorCallback)
 
 * `\views\manage\update.php` (23)

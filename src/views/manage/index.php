@@ -26,18 +26,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             [
                 'attribute' => 'id',
-                'contentOptions' => ['style' => 'max-width: 50px;'],
+                'contentOptions' => ['style' => 'max-width: 10px;'],
             ],
+
+            ///[v0.0.20 (ADD# backend typo)]
             [
                 'attribute' => 'content',
+                'format' => 'html',
                 'contentOptions' => ['style' => 'max-width: 350px;'],
-                'value' => function ($model) {
-                    return StringHelper::truncate($model->content, 100);
-                },
+                // 'value' => function ($model) {
+                //     return StringHelper::truncate($model->content, 100);
+                // },
             ],
+
             'related_to',
             'vote_up',
             'vote_down',
+
             [
                 'attribute' => 'created_by',
                 'value' => function ($model) {
@@ -46,6 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => $commentModel::getAuthors(),
                 'filterInputOptions' => ['prompt' => Module::t('message', 'Select Author'), 'class' => 'form-control'],
             ],
+
             [
                 'attribute' => 'status',
                 'value' => function ($model) {
@@ -56,7 +62,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             ///[v0.0.6 (ADD# datepicker)]
-            ['attribute' => 'created_at', 'format' => ['datetime', 'php:Y-m-d H:i:s'],
+            [
+                'attribute' => 'created_at', 
+                'format' => ['datetime', 'php:Y-m-d H:i:s'],
                 'filter' => DatePicker::widget(
                     [
                         'model' => $searchModel, 
