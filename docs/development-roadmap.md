@@ -1,5 +1,10 @@
 # Development roadmap
 
+## v0.0.19 (ADD# backend editorCallback)
+
+* `\views\manage\update.php` (23)
+
+
 ## v0.0.18 (remove yii2mod\behaviors\PurifyBehavior)
 
 

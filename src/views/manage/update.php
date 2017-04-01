@@ -18,9 +18,18 @@ $this->params['breadcrumbs'][] = Module::t('message', 'Update');
     <h1><?php echo Html::encode($this->title) ?></h1>
 
     <div class="comment-form">
-        <?php $form = ActiveForm::begin(); ?>
+        <?php $form = ActiveForm::begin();
 
-        <?php echo $form->field($model, 'content', ['template' => '{input}{error}'])->textarea(['rows' => 4, 'data' => ['comment' => 'content']]); ?>
+        ///[v0.0.19 (ADD# backend editorCallback)]
+        $field = $form->field($model, 'content', ['template' => '{input}{error}']);
+        $params = ['rows' => 4, 'data' => ['comment' => 'content']];
+
+        if (is_callable($editor = Module::instance()->editorCallback)) {
+            echo call_user_func($editor, $field, $model, 'content', null, $params);
+        } else {
+            echo $field->textarea($params);
+        }
+        ?>
 
         <?php echo $form->field($model, 'status')->dropDownList(Status::listData()); ?>
         <div class="form-group">
