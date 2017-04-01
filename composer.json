@@ -23,7 +23,6 @@
         "yiisoft/yii2-bootstrap": "*",
 
         "yiisoft/yii2-jui": "~2.0.0",
-        "yii2mod/yii2-behaviors": "*",
         "yii2mod/yii2-enum": "*",
         "yii2mod/yii2-moderation": "*",
         "paulzi/yii2-adjacency-list": "^2.0"

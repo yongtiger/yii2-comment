@@ -1,5 +1,8 @@
 # Development roadmap
 
+## v0.0.18 (remove yii2mod\behaviors\PurifyBehavior)
+
+
 ## v0.0.17 (ADD# editorCallback)
 
 * `\widgets\views\_form.php` (25)

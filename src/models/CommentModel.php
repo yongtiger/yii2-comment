@@ -9,7 +9,6 @@ use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 use yongtiger\comment\Module;
-use yii2mod\behaviors\PurifyBehavior;
 use yii2mod\moderation\enums\Status;
 use yii2mod\moderation\ModerationBehavior;
 use yii2mod\moderation\ModerationQuery;
@@ -116,18 +115,6 @@ class CommentModel extends ActiveRecord
                 'createdAtAttribute' => 'created_at',
                 'updatedAtAttribute' => 'updated_at',
             ],
-            ///comment out for testing!
-            // 'purify' => [
-            //     'class' => PurifyBehavior::class,
-            //     'attributes' => ['content'],
-            //     'config' => [
-            //         'HTML.SafeIframe' => true,
-            //         'URI.SafeIframeRegexp' => '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
-            //         'AutoFormat.Linkify' => true,
-            //         'HTML.TargetBlank' => true,
-            //         'HTML.Allowed' => 'a[href], iframe[src|width|height|frameborder], img[src]',
-            //     ],
-            // ],
             'adjacencyList' => [
                 'class' => AdjacencyListBehavior::class,
                 'parentAttribute' => 'parent_id',

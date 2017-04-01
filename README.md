@@ -1,4 +1,4 @@
-# Yii2-comment v0.0.17 (ADD# editorCallback)
+# Yii2-comment v0.0.18 (remove yii2mod\behaviors\PurifyBehavior)
 
 [![Latest Stable Version](https://poser.pugx.org/yongtiger/yii2-comment/v/stable)](https://packagist.org/packages/yongtiger/yii2-comment)
 [![Total Downloads](https://poser.pugx.org/yongtiger/yii2-comment/downloads)](https://packagist.org/packages/yongtiger/yii2-comment) 
