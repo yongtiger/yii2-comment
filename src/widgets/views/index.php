@@ -20,21 +20,20 @@ use yongtiger\comment\Module;
 
 $commentModelClass = Module::instance()->commentModelClass; ///[v0.0.10 (ADD# canCallback)]
 
+///[v0.0.16 (ADD# sort)]
+$params = Yii::$app->request->queryParams;
+$orderBy = empty($params['orderby']) ? $this->context->sort : $params['orderby'];
+
 ?>
 <div class="comment-wrapper" id="<?php echo $commentWrapperId; ?>">
     <?php Pjax::begin(['enablePushState' => false, 'timeout' => 30000, 'id' => $pjaxContainerId]); ?>
     <div class="comments row">
         <div class="col-md-12 col-sm-12">
-            <div class="title-block clearfix">
-                <h3 class="h3-body-title">
-                    <?php echo Module::t('message', 'Comments ({0})', $commentModel->getCommentsCount()); ?>
-                </h3>
-                <div class="title-separator"></div>
-            </div>
+
             <?php echo ListView::widget(ArrayHelper::merge(
                 [
                     'dataProvider' => $commentDataProvider,
-                    'layout' => "{items}\n{pager}",
+                    'layout' => "{summary}\n{items}\n{pager}",
                     'itemView' => '_list',
                     'viewParams' => [
                         'maxLevel' => $maxLevel,
@@ -47,9 +46,42 @@ $commentModelClass = Module::instance()->commentModelClass; ///[v0.0.10 (ADD# ca
                     'itemOptions' => [
                         'tag' => false,
                     ],
+
+                    ///[v0.0.16 (ADD# sort)]
+                    'summary' => '
+                        <div class="title-block clearfix">
+                            <h3 class="h3-body-title">
+                                Comments ({totalCount})
+                            </h3>
+                            <div class="title-separator"></div>
+                            <ul class="nav nav-tabs comment-action-buttons">
+                                <li role="presentation" ' . ($orderBy == 'created-at-desc' ? 'class="active"' : '') . '>
+                                    <a href="' . Url::current(['orderby' => 'created-at-desc']) . '">' . Module::t('message', 'Latest') . '</a>
+                                </li>
+                                <li role="presentation" ' . ($orderBy == 'created-at-asc' ? 'class="active"' : '') . '>
+                                    <a href="' . Url::current(['orderby' => 'created-at-asc']) . '">' . Module::t('message', 'Earliest') . '</a>
+                                </li>
+                                <li role="presentation" ' . ($orderBy == 'vote-up-desc' ? 'class="active"' : '') . '>
+                                    <a href="' . Url::current(['orderby' => 'vote-up-desc']) . '">' . Module::t('message', 'Most Vote Up') . '</a>
+                                </li>
+                                <li role="presentation" ' . ($orderBy == 'vote-up-asc' ? 'class="active"' : '') . '>
+                                    <a href="' . Url::current(['orderby' => 'vote-up-asc']) . '">' . Module::t('message', 'Less Vote Up') . '</a>
+                                </li>
+                                <li role="presentation" ' . ($orderBy == 'vote-down-desc' ? 'class="active"' : '') . '>
+                                    <a href="' . Url::current(['orderby' => 'vote-down-desc']) . '">' . Module::t('message', 'Most Vote Down') . '</a>
+                                </li>
+                                <li role="presentation" ' . ($orderBy == 'vote-down-asc' ? 'class="active"' : '') . '>
+                                    <a href="' . Url::current(['orderby' => 'vote-down-asc']) . '">' . Module::t('message', 'Less Vote Down') . '</a>
+                                </li>
+                            </ul>
+                        </div>
+                    ',
+                    
+                    'emptyText' => Module::t('message', '(no comments)'),
                 ],
                 $listViewConfig
             )); ?>
+
             <?php if (!Yii::$app->user->isGuest) : ?>
                 <?php echo $this->render('_form', [
                     'commentModel' => $commentModel,

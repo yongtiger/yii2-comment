@@ -233,60 +233,6 @@ class CommentModel extends ActiveRecord
     }
 
     /**
-     * Get comments tree.
-     *
-     * @param string $entity
-     * @param string $entityId
-     * @param null $maxLevel
-     *
-     * @return array|ActiveRecord[]
-     */
-    public static function getTree($entity, $entityId, $maxLevel = null)
-    {
-        $query = static::find()
-            ->approved()
-            ->andWhere([
-                'entity_id' => $entityId,
-                'entity' => $entity,
-            ])->with(['author']);
-
-        if ($maxLevel > 0) {
-            $query->andWhere(['<=', 'level', $maxLevel]);
-        }
-
-        $models = $query->all();
-
-        if (!empty($models)) {
-            $models = self::buildTree($models);
-        }
-
-        return $models;
-    }
-
-    /**
-     * Build comments tree.
-     *
-     * @param array $data comments list
-     * @param int $rootID
-     *
-     * @return array|ActiveRecord[]
-     */
-    protected static function buildTree(&$data, $rootID = 0)
-    {
-        $tree = [];
-
-        foreach ($data as $id => $node) {
-            if (isset($node) && $node->parent_id == $rootID) {
-                $data[$id] = (unset)$data[$id];///[v0.0.5 (FIX# buildTree)]As the php documentation reads:As foreach relies on the internal array pointer in PHP 5, changing it within the loop may lead to unexpected behavior.
-                $node->children = self::buildTree($data, $node->id);
-                $tree[] = $node;
-            }
-        }
-
-        return $tree;
-    }
-
-    /**
      * @return array|null|ActiveRecord[]
      */
     public function getChildren()

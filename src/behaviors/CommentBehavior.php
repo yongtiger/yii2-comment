@@ -24,14 +24,10 @@ use yongtiger\comment\widgets\Comment;
  *                         'pageParam' => 'comment-page',
  *                         'pageSizeParam' => 'comment-per-page',
  *                         'pageSize' => 10,
- *                     ],
- *                     'sort' => [
- *                          'defaultOrder' => [
- *                             'id' => SORT_DESC,
- *                             // 'id' => SORT_ASC,
- *                         ],
+ *                         'pageSizeLimit' => [1, 50],
  *                     ],
  *                 ],
+ *                 'sort' => 'created-at-asc',
  *             ],
  *         ],
  *         // ...
@@ -54,18 +50,11 @@ use yongtiger\comment\widgets\Comment;
  *                 'pageParam' => 'comment-page',
  *                 'pageSizeParam' => 'comment-per-page',
  *                 'pageSize' => 5,
+ *                 'pageSizeLimit' => [1, 50],
  *             ],
- *             'sort' => [
- *                 // 'attributes' => new \yii\helpers\ReplaceArrayValue(['created_at']),
- *                 'defaultOrder' => [
- *                     // 'id' => SORT_DESC,
- *                     'id' => SORT_ASC,
- *                     // 'created_at' => SORT_DESC,
- *                     // 'created_at' => SORT_ASC,
- *                 ],
- *             ],
- *         ]
- *     ]
+ *         ],
+ *         'sort' => 'created-at-asc',
+ *     ],
  * );
  * ```
  *

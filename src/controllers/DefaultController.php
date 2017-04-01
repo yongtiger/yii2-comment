@@ -176,7 +176,7 @@ class DefaultController extends Controller
 
                 if ($commentModel->can($commentModelClass::PERMISSION_VOTE)) {
 
-                    $commentModelClass::updateAllCounters($post['vote'] > 0 ? ['up_vote' => $post['vote']] : ['down_vote' => $post['vote']], ['id' => $post['id']]);
+                    $commentModelClass::updateAllCounters($post['vote'] > 0 ? ['vote_up' => $post['vote']] : ['vote_down' => - $post['vote']], ['id' => $post['id']]);
 
                     return 'success';  
                 }

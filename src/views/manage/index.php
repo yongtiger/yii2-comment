@@ -35,7 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     return StringHelper::truncate($model->content, 100);
                 },
             ],
-            'attribute' => 'related_to',
+            'related_to',
+            'vote_up',
+            'vote_down',
             [
                 'attribute' => 'created_by',
                 'value' => function ($model) {
@@ -68,7 +70,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]
                 )
             ],
-
 
             [
                 'header' => 'Actions',
