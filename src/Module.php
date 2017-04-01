@@ -98,6 +98,13 @@ class Module extends \yii\base\Module
      */
     public $canCallback;
 
+    ///[v0.0.17 (ADD# editorCallback)]
+    /**
+     *
+     * @var callable
+     */
+    public $editorCallback;
+
     /**
      * @inheritdoc
      */

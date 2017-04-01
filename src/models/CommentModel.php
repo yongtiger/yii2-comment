@@ -116,17 +116,18 @@ class CommentModel extends ActiveRecord
                 'createdAtAttribute' => 'created_at',
                 'updatedAtAttribute' => 'updated_at',
             ],
-            'purify' => [
-                'class' => PurifyBehavior::class,
-                'attributes' => ['content'],
-                'config' => [
-                    'HTML.SafeIframe' => true,
-                    'URI.SafeIframeRegexp' => '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
-                    'AutoFormat.Linkify' => true,
-                    'HTML.TargetBlank' => true,
-                    'HTML.Allowed' => 'a[href], iframe[src|width|height|frameborder], img[src]',
-                ],
-            ],
+            ///comment out for testing!
+            // 'purify' => [
+            //     'class' => PurifyBehavior::class,
+            //     'attributes' => ['content'],
+            //     'config' => [
+            //         'HTML.SafeIframe' => true,
+            //         'URI.SafeIframeRegexp' => '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%',
+            //         'AutoFormat.Linkify' => true,
+            //         'HTML.TargetBlank' => true,
+            //         'HTML.Allowed' => 'a[href], iframe[src|width|height|frameborder], img[src]',
+            //     ],
+            // ],
             'adjacencyList' => [
                 'class' => AdjacencyListBehavior::class,
                 'parentAttribute' => 'parent_id',
