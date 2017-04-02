@@ -22,6 +22,12 @@ class Module extends \yii\base\Module
      */
     public static $moduleName = 'comment';
 
+    ///[v0.0.17 (ADD# editorCallback)]
+    /**
+     * @var callable
+     */
+    public $editorCallback;
+
     /**
      * @var string the class name of the [[identity]] object
      */
@@ -97,13 +103,6 @@ class Module extends \yii\base\Module
      * @var callable
      */
     public $canCallback;
-
-    ///[v0.0.17 (ADD# editorCallback)]
-    /**
-     *
-     * @var callable
-     */
-    public $editorCallback;
 
     /**
      * @inheritdoc

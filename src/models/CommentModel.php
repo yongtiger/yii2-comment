@@ -25,11 +25,11 @@ use paulzi\adjacencyList\AdjacencyListBehavior;
  * @property int $level
  * @property int $vote_up
  * @property int $vote_down
+ * @property int $status
+ * @property string $related_to
+ * @property string $related_url
  * @property int $created_by
  * @property int $updated_by
- * @property string $related_to
- * @property string $url
- * @property int $status
  * @property int $created_at
  * @property int $updated_at
  *
@@ -69,7 +69,7 @@ class CommentModel extends ActiveRecord
         return [
             [['entity', 'entity_id'], 'required'],
             ['content', 'required', 'message' => Module::t('message', 'Comment cannot be blank.')],
-            [['content', 'entity', 'related_to', 'url'], 'string'],
+            [['content', 'entity', 'related_to', 'related_url'], 'string'],
             ['status', 'default', 'value' => Status::APPROVED],
             ['status', 'in', 'range' => Status::getConstantsByName()],
             ['level', 'default', 'value' => 1],
@@ -124,6 +124,12 @@ class CommentModel extends ActiveRecord
                 'class' => ModerationBehavior::class,
                 'moderatedByAttribute' => false,
             ],
+
+            ///[v0.0.21 (CHG# yongtiger\attachable\behaviors\AttachableBehavior)]
+            // 'attachable' => [
+            //     'class' => \yongtiger\attachable\behaviors\AttachableBehavior::className(),///?????replacable!
+            // ],
+
         ];
     }
 
@@ -138,14 +144,14 @@ class CommentModel extends ActiveRecord
             'entity' => Module::t('message', 'Entity'),
             'entity_id' => Module::t('message', 'Entity ID'),
             'parent_id' => Module::t('message', 'Parent ID'),
-            'status' => Module::t('message', 'Status'),
             'level' => Module::t('message', 'Level'),
             'vote_up' => Module::t('message', 'Vote Up'), ///[v0.0.12 (ADD# vote)]
             'vote_down' => Module::t('message', 'Vote Down'), ///[v0.0.12 (ADD# vote)]
+            'status' => Module::t('message', 'Status'),
+            'related_to' => Module::t('message', 'Related to'),
+            'related_url' => Module::t('message', 'Related Url'),
             'created_by' => Module::t('message', 'Created by'),
             'updated_by' => Module::t('message', 'Updated by'),
-            'related_to' => Module::t('message', 'Related to'),
-            'url' => Module::t('message', 'Url'),
             'created_at' => Module::t('message', 'Created date'),
             'updated_at' => Module::t('message', 'Updated date'),
         ];
@@ -321,7 +327,7 @@ class CommentModel extends ActiveRecord
      */
     public function getAnchorUrl()
     {
-        return "#comment-{$this->id}";
+        return "#comment-{$this->id}";  ///Note: issue may occur while using pagnation!
     }
 
     /**
@@ -329,8 +335,8 @@ class CommentModel extends ActiveRecord
      */
     public function getViewUrl()
     {
-        if (!empty($this->url)) {
-            return $this->url . $this->getAnchorUrl();
+        if (!empty($this->related_url)) {
+            return $this->related_url . $this->getAnchorUrl();
         }
 
         return null;
