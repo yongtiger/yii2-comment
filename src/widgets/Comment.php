@@ -157,6 +157,7 @@ class Comment extends Widget
             'commentModel' => $commentModel,
             'maxLevel' => $this->maxLevel,
             'encryptedEntity' => $this->encryptedEntity,
+            'pjaxTimeout' => Module::instance()->pjaxTimeout,   ///[v0.1.0 (ADD# pjaxTimeout)]Should set to `1` to equivalent to disable pjax when using ueditor (which use iframe!)
             'pjaxContainerId' => $this->pjaxContainerId,
             'formId' => $this->formId,
             'listViewConfig' => $this->listViewConfig,

@@ -104,6 +104,14 @@ class Module extends \yii\base\Module
      */
     public $canCallback;
 
+    ///[v0.1.0 (ADD# pjaxTimeout)]Should set to `1` to equivalent to disable pjax when using ueditor (which use iframe!)
+    /**
+     * @var integer pjax timeout
+     * `0`: never expired
+     * `1`: Equivalent to disable pjax
+     */
+    public $pjaxTimeout = 10000;    ///or 0
+
     /**
      * @inheritdoc
      */

@@ -26,7 +26,11 @@ $orderBy = empty($params['orderby']) ? $this->context->sort : $params['orderby']
 
 ?>
 <div class="comment-wrapper" id="<?php echo $commentWrapperId; ?>">
-    <?php Pjax::begin(['enablePushState' => false, 'timeout' => 30000, 'id' => $pjaxContainerId]); ?>
+
+    <!--///[FIX# comment pagination url pjax issue]'enablePushState' => true-->
+    <!--///[v0.1.0 (ADD# pjaxTimeout)]Should set to `1` to equivalent to disable pjax when using ueditor (which use iframe!)-->
+    <?php Pjax::begin(['enablePushState' => true, 'timeout' => $pjaxTimeout, 'id' => $pjaxContainerId]); ?>
+    
     <div class="comments row">
         <div class="col-md-12 col-sm-12">
 

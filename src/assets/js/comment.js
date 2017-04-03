@@ -34,12 +34,16 @@
     var commentData = {};
 
     ///[v0.0.14 (CHG# vote)]
-    var placeholder = $('#commentmodel-content').attr('placeholder');
+    var placeholder = $("textarea[name='CommentModel[content]']").attr('placeholder');
 
     // Methods
     var methods = {
         init: function (options) {
             return this.each(function () {
+
+                ///[v0.1.0 (ADD# pjaxTimeout)]Should set to `1` to equivalent to disable pjax when using ueditor (which use iframe!)
+                defaults.pjaxSettings.timeout = $(options.pjaxContainerId).data('pjax-timeout');
+
                 var $comment = $(this);
                 var settings = $.extend({}, defaults, options || {});
                 var id = $comment.attr('id');
@@ -77,9 +81,13 @@
     function createComment(event) {
         var $commentForm = $(this);
         var settings = commentData[event.data.wrapperSelector].settings;
-        var pjaxSettings = $.extend({container: settings.pjaxContainerId}, settings.pjaxSettings);
+
+        ///[FIX# comment pagination url pjax issue]
+        // var pjaxSettings = $.extend({container: settings.pjaxContainerId}, settings.pjaxSettings);
+        var pjaxSettings = $.extend(settings.pjaxSettings, {container: settings.pjaxContainerId, url: window.location.href});
+
         var formData = $commentForm.serializeArray();
-        formData.push({'name': 'CommentModel[url]', 'value': getCurrentUrl()});
+        formData.push({'name': 'CommentModel[related_url]', 'value': getCurrentUrl()});
         // disable submit button
         $commentForm.find(':submit').prop('disabled', true).text(settings.submitBtnLoadingText);
         // creating a comment and errors handling
@@ -122,7 +130,7 @@
 
         ///[v0.0.11 (ADD# placeholder @authorName)]
         var authorName = $(parentCommentSelector).find('.comment-author-name span').html();
-        $commentForm.find('#commentmodel-content').attr('placeholder', '@' + authorName);
+        $commentForm.find("textarea[name='CommentModel[content]']").attr('placeholder', '@' + authorName);
 
         return false;
     }
@@ -141,7 +149,7 @@
         $commentForm.find('[data-comment="parent-id"]').val(null);
 
         ///[v0.0.14 (CHG# vote)]
-        $commentForm.find('#commentmodel-content').attr('placeholder', placeholder);
+        $commentForm.find("textarea[name='CommentModel[content]']").attr('placeholder', placeholder);
         
         return false;
     }
@@ -177,7 +185,11 @@
     function voteComment(event) {
         var $this = $(this);
         var settings = commentData[event.data.wrapperSelector].settings;
-        var pjaxSettings = $.extend({container: settings.pjaxContainerId}, settings.pjaxSettings);
+
+        ///[FIX# comment pagination url pjax issue]
+        // var pjaxSettings = $.extend({container: settings.pjaxContainerId}, settings.pjaxSettings);
+        var pjaxSettings = $.extend(settings.pjaxSettings, {container: settings.pjaxContainerId, url: window.location.href});
+
         var url = $this.data('url');
         var value = $this.data('value');
         var comment_id = $this.data('comment-id');
@@ -189,6 +201,7 @@
                 alert(xhr.responseText);
             },
             success: function (result, status, xhr) {
+
                 $.pjax(pjaxSettings);
             }
         });
