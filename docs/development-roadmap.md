@@ -9,7 +9,7 @@ Note: Should set to `1` to equivalent to disable pjax when using ueditor (which 
 * `\widgets\views\index.php` (32)
 * `\assets\js\comment.js` (45)
 
-Plus: FIX# comment pagination url pjax issue, FIX# disable submit button
+Plus: FIX# comment pagination url pjax issue, FIX# find submit button
 
 
 ## v0.0.999 (attachable using js)

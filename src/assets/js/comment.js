@@ -88,8 +88,8 @@
 
         var formData = $commentForm.serializeArray();
         formData.push({'name': 'CommentModel[related_url]', 'value': getCurrentUrl()});
-        
-        ///[FIX# disable submit button]
+
+        ///[FIX# find submit button]
         // $commentForm.find(':submit').prop('disabled', true).text(settings.submitBtnLoadingText);
         $commentForm.find('[type=submit]').prop('disabled', true).text(settings.submitBtnLoadingText);
 
@@ -107,7 +107,10 @@
                     $commentForm.yiiActiveForm('updateAttribute', 'commentmodel-content', [data.message]);
                 }
                 // enable submit button
-                $commentForm.find(':submit').prop('disabled', false).text(settings.submitBtnText);
+        
+            ///[FIX# find submit button]
+            // $commentForm.find(':submit').prop('disabled', true).text(settings.submitBtnLoadingText);
+                $commentForm.find('[type=submit]').prop('disabled', false).text(settings.submitBtnText);
             }
         }).fail(function (xhr, status, error) {
             alert(error);
