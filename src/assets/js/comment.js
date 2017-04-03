@@ -23,11 +23,11 @@
         cancelReplyBtnSelector: '#cancel-reply',
         pjaxContainerId: '#comment-pjax-container',
         pjaxSettings: {
-            timeout: 10000,
+            // timeout: 10000,
             scrollTo: false,
             url: window.location.href
         },
-        submitBtnText: 'Comment',
+        // submitBtnText: 'Comment',
         submitBtnLoadingText: 'Loading...'
     };
 
@@ -43,6 +43,8 @@
 
                 ///[v0.1.0 (ADD# pjaxTimeout)]Should set to `1` to equivalent to disable pjax when using ueditor (which use iframe!)
                 defaults.pjaxSettings.timeout = $(options.pjaxContainerId).data('pjax-timeout');
+                ///[FIX# submitBtnText]
+                defaults.submitBtnText = $(this).find('[type=submit]').text();
 
                 var $comment = $(this);
                 var settings = $.extend({}, defaults, options || {});
