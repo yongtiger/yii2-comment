@@ -83,13 +83,16 @@
         var settings = commentData[event.data.wrapperSelector].settings;
 
         ///[FIX# comment pagination url pjax issue]
-        // var pjaxSettings = $.extend({container: settings.pjaxContainerId}, settings.pjaxSettings);
-        var pjaxSettings = $.extend(settings.pjaxSettings, {container: settings.pjaxContainerId, url: window.location.href});
+        var pjaxSettings = $.extend({container: settings.pjaxContainerId}, settings.pjaxSettings);
+        pjaxSettings.url = window.location.href;
 
         var formData = $commentForm.serializeArray();
         formData.push({'name': 'CommentModel[related_url]', 'value': getCurrentUrl()});
-        // disable submit button
-        $commentForm.find(':submit').prop('disabled', true).text(settings.submitBtnLoadingText);
+        
+        ///[FIX# disable submit button]
+        // $commentForm.find(':submit').prop('disabled', true).text(settings.submitBtnLoadingText);
+        $commentForm.find('[type=submit]').prop('disabled', true).text(settings.submitBtnLoadingText);
+
         // creating a comment and errors handling
         $.post($commentForm.attr('action'), formData, function (data) {
             if (data.status == 'success') {
@@ -187,8 +190,8 @@
         var settings = commentData[event.data.wrapperSelector].settings;
 
         ///[FIX# comment pagination url pjax issue]
-        // var pjaxSettings = $.extend({container: settings.pjaxContainerId}, settings.pjaxSettings);
-        var pjaxSettings = $.extend(settings.pjaxSettings, {container: settings.pjaxContainerId, url: window.location.href});
+        var pjaxSettings = $.extend({container: settings.pjaxContainerId}, settings.pjaxSettings);
+        pjaxSettings.url = window.location.href;
 
         var url = $this.data('url');
         var value = $this.data('value');
