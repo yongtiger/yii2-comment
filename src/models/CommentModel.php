@@ -124,12 +124,6 @@ class CommentModel extends ActiveRecord
                 'class' => ModerationBehavior::class,
                 'moderatedByAttribute' => false,
             ],
-
-            ///[v0.0.21 (CHG# yongtiger\attachable\behaviors\AttachableBehavior)]
-            // 'attachable' => [
-            //     'class' => \yongtiger\attachable\behaviors\AttachableBehavior::className(),///?????replacable!
-            // ],
-
         ];
     }
 

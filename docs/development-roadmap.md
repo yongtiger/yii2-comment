@@ -1,5 +1,11 @@
 # Development roadmap
 
+## v0.1.1 (FIX# orderby)
+
+* `\widgets\views\index.php` (24)
+* `\widgets\Comment.php` (253)
+
+
 ## v0.1.0 (reconstruct and ADD# pjaxTimeout)
 
 Note: Should set to `1` to equivalent to disable pjax when using ueditor (which use iframe!)

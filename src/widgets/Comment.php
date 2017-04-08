@@ -250,21 +250,18 @@ class Comment extends Widget
         }
 
         ///[v0.0.16 (ADD# sort)]
-        $params = Yii::$app->request->queryParams;
-        if (empty($params['orderby'])) {
-            $params['orderby'] = $this->sort;
-        }
-        if ($params['orderby'] == 'created-at-desc') {
+        $orderBy = Yii::$app->request->get('orderby', $this->sort);  ///@see yii2\web\Request::get($name = null, $defaultValue = null)
+        if ($orderBy == 'created-at-desc') {
             $query->orderBy(['created_at' => SORT_DESC]);
-        } elseif ($params['orderby'] == 'created-at-asc') {
+        } elseif ($orderBy == 'created-at-asc') {
             $query->orderBy(['created_at' => SORT_ASC]);
-        } elseif ($params['orderby'] == 'vote-up-desc') {
+        } elseif ($orderBy == 'vote-up-desc') {
             $query->orderBy(['vote_up' => SORT_DESC]);
-        } elseif ($params['orderby'] == 'vote-up-asc') {
+        } elseif ($orderBy == 'vote-up-asc') {
             $query->orderBy(['vote_up' => SORT_ASC]);
-        } elseif ($params['orderby'] == 'vote-down-desc') {
+        } elseif ($orderBy == 'vote-down-desc') {
             $query->orderBy(['vote_down' => SORT_DESC]);
-        } elseif ($params['orderby'] == 'vote-down-asc') {
+        } elseif ($orderBy == 'vote-down-asc') {
             $query->orderBy(['vote_down' => SORT_ASC]);
         }
 

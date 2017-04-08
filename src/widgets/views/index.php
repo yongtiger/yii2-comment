@@ -21,8 +21,7 @@ use yongtiger\comment\Module;
 $commentModelClass = Module::instance()->commentModelClass; ///[v0.0.10 (ADD# canCallback)]
 
 ///[v0.0.16 (ADD# sort)]
-$params = Yii::$app->request->queryParams;
-$orderBy = empty($params['orderby']) ? $this->context->sort : $params['orderby'];
+$orderBy = Yii::$app->request->get('orderby', $this->context->sort);  ///@see yii2\web\Request::get($name = null, $defaultValue = null)
 
 ?>
 <div class="comment-wrapper" id="<?php echo $commentWrapperId; ?>">

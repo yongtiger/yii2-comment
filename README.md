@@ -1,4 +1,4 @@
-# Yii2-comment v0.1.0 (reconstruct and ADD# pjaxTimeout)
+# Yii2-comment v0.1.1 (FIX# orderby)
 
 [![Latest Stable Version](https://poser.pugx.org/yongtiger/yii2-comment/v/stable)](https://packagist.org/packages/yongtiger/yii2-comment)
 [![Total Downloads](https://poser.pugx.org/yongtiger/yii2-comment/downloads)](https://packagist.org/packages/yongtiger/yii2-comment) 
